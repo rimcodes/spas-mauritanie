@@ -1,0 +1,40 @@
+:host {
+  // width: 100%;
+  position: relative;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.mat-column-name {
+  padding-right: 10px;
+}
+
+td {
+  text-align: right;
+}
+
+.add-button {
+  position: absolute;
+  top: -60px;
+  right: 0;
+
+}
+
+@media screen and (max-width: 560px) {
+
+  .mat-column-date {
+    display: none;
+  }
+
+  .mat-column-payment {
+    display: none;
+  }
+
+  .mat-column-delivery {
+    display: none;
+  }
+
+}
+

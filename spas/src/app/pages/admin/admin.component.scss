@@ -1,0 +1,33 @@
+h1 {
+  padding-top: 50px;
+  padding-right: 50px;
+}
+
+.form-card {
+  margin: 20px;
+  padding-bottom: 50px;
+}
+
+.users-list {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.users-list > h3 {
+  flex: 1;
+}
+
+.users-list > p {
+  flex: 2;
+}
+
+.users-list > small {
+  flex: 1;
+}
+
+.users-list > div {
+  flex: 1;
+}

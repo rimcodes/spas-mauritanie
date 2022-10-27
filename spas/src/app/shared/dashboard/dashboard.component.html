@@ -1,0 +1,10 @@
+<div class="grid-container">
+  <mat-grid-list *ngIf="cards; else loading" cols="2" rowHeight="250px">
+    <mat-grid-tile *ngFor="let card of cards | async; let i = index;" [colspan]="2" [rowspan]="2">
+      <app-facture-item [admin]="admin"  [facture]="card"></app-facture-item>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <ng-template #loading>
+    <app-loading #loading></app-loading>
+  </ng-template>
+</div>

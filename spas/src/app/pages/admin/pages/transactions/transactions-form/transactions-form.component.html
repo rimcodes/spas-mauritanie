@@ -1,0 +1,79 @@
+<mat-card class="form-card">
+  <form [formGroup]="form">
+    <h2>فاتورة جديد</h2>
+    <mat-grid-list [cols]="breakpoint.cols" [rowHeight]="breakpoint.ration" (window:resize)="onResize($event)">
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <mat-label>الاسم</mat-label>
+          <input matInput type="text" formControlName="name">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <mat-label> القيمة </mat-label>
+          <input matInput type="number" formControlName="price">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <mat-label>الفاتورة</mat-label>
+          <mat-select  formControlName="facture">
+            <!-- <mat-option cheched *ngIf="editMode" [value]="'sxsc'">
+              user
+            </mat-option> -->
+            <mat-option *ngFor="let facture of factures | async" [value]="facture.id">
+              {{facture.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <mat-label> الكمية</mat-label>
+          <input matInput type="number" formControlName="quantity">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <mat-label> رقم المعاملة </mat-label>
+          <input matInput type="number" formControlName="number">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <mat-label> حالة التوصيل </mat-label>
+          <input matInput type="text" formControlName="delivery">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-slide-toggle
+          color="primary"
+          formControlName="payment"
+        >
+          تم الدفع
+        </mat-slide-toggle>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="breakpoint.phoneSize ? 2 : 4">
+        <mat-form-field>
+          <mat-label>التفاصيل</mat-label>
+          <textarea matInput placeholder="اضف تفاصيل ..." formControlName="description"></textarea>
+        </mat-form-field>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+    <button mat-raised-button (click)="onSubmit()" color="primary">
+      {{
+         editMode ? 'تعديل' : 'إنشاء'
+      }}
+    </button>
+  </form>
+</mat-card>
+

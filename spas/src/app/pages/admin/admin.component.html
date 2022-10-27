@@ -1,0 +1,59 @@
+<h1 class="mat-h1">لوحة تحكم الادارة</h1>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="الزبناء">
+    <mat-card class="form-card" (window:resize)="onResize($event)">
+      <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
+        <mat-icon [routerLink]="['users', 'form']">add</mat-icon>
+      </button>
+      <mat-list role="list">
+        <mat-list-item>
+          <div class="users-list">
+            <h3> الاسم </h3>
+            <div> مدير </div>
+            <ng-container *ngIf="!breakpoint">
+              <p> البريد الالكتروني </p>
+              <small>تاريخ الانشاء </small>
+            </ng-container>
+            <div></div>
+          </div>
+
+        </mat-list-item>
+        <mat-list-item role="listitem" *ngFor="let user of users | async">
+          <div class="users-list">
+            <h3>{{ user.name }}</h3>
+            <div>
+              <mat-slide-toggle
+                color="primary"
+                [checked]="user.isAdmin">
+                مدير
+              </mat-slide-toggle>
+            </div>
+            <ng-container *ngIf="!breakpoint">
+              <p> {{ user.email }} </p>
+
+              <small> {{ user.created_at | date }} </small>
+            </ng-container>
+
+            <div>
+              <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+                <mat-icon [routerLink]="['users', 'form', user.id]">edit</mat-icon>
+              </button>
+              <button mat-mini-fab color="warn" aria-label="Example icon button with a delete icon">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+
+  </mat-tab>
+  <mat-tab label="الفاتورات">
+    <shared-dashboard [admin]="true" ></shared-dashboard>
+
+  </mat-tab>
+  <mat-tab label="آخر الاحداث"> Content 3 </mat-tab>
+</mat-tab-group>
+

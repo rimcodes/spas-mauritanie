@@ -1,0 +1,44 @@
+<mat-card class="dashboard-card" *ngIf="facture; else loading">
+  <mat-card-header>
+    <mat-card-title>
+      {{ facture.name.toUpperCase() }}
+      <ng-container *ngIf="admin">
+        <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </ng-container>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item [routerLink]="['factures', 'form']">
+          <strong>فاتورة جديدة</strong>
+        </button>
+        <button mat-menu-item [routerLink]="['factures', 'form', facture.id]">تعديل</button>
+        <button mat-menu-item>حذف</button>
+      </mat-menu>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="dashboard-card-content">
+    <div class="facture">
+      <div class="facture-header">
+        <div class="text">
+          <h2>الشركة العربية للخدمات</h2>
+        </div>
+        <div class="image">
+          <img src="assets/logo.png" alt="spas logo" width="72">
+        </div>
+      </div>
+      <span *ngIf="!facture.updated_at; else update"> تاريخ الانشاء: {{facture.created_at | date : 'mediumDate' }} </span>
+      <ng-template #update>
+        <span> تاريخ آخر تعديل: {{facture.updated_at | date : 'mediumDate' }} </span>
+      </ng-template>
+      <p> رقم الفاتورة:  {{  facture.number }} </p>
+      <p>  اسم الزبون: {{facture.user.name}} </p>
+      <p> {{facture.recite}} </p>
+
+      <app-transactions [admin]="admin" *ngIf="transactions" [transactions]="transactions"></app-transactions>
+
+    </div>
+  </mat-card-content>
+</mat-card>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

@@ -1,0 +1,71 @@
+<div class="mat-elevation-z8" *ngIf="transactions">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="date" [style]="breakpoint.phoneSize ? 'display: hiden' : ''">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date التاريخ</th>
+        <td mat-cell *matCellDef="let row">{{row.created_at | date : 'shortDate'}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name الاسم</th>
+      <td mat-cell *matCellDef="let row">{{row.name}}</td>
+    </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <ng-container>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity الكمية</th>
+        <td mat-cell *matCellDef="let row">{{row.quantity}}</td>
+      </ng-container>
+    </ng-container>
+
+    <!-- Number Column -->
+    <ng-container matColumnDef="number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Number رقم الفاتورة</th>
+      <td mat-cell *matCellDef="let row">{{row.number}}</td>
+    </ng-container>
+
+    <!-- Delivery Column -->
+    <ng-container matColumnDef="delivery">
+      <ng-container>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Livration التسليم</th>
+        <td mat-cell *matCellDef="let row">{{row.delivery}}</td>
+      </ng-container>
+    </ng-container>
+
+    <!-- Payment Column -->
+    <ng-container matColumnDef="payment">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Payment حالة السداد</th>
+      <td mat-cell *matCellDef="let row">{{row.payment ? 'تم الدفع' : 'لم يتم الدفع بعد'}}</td>
+    </ng-container>
+
+    <!-- Button Column -->
+    <ng-container matColumnDef="buttons">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let row">
+        <button [routerLink]="['transactions', 'form', row.id]" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="deleteTransaction(row.id)" mat-mini-fab color="warn" aria-label="Example icon button with a delete icon">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]=" 1"
+      [pageIndex]="0"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[1, 5, 10, 20]"
+      aria-label="Select page">
+  </mat-paginator>
+</div>
+<button [routerLink]="['transactions', 'form']" *ngIf="admin" class="add-button" mat-fab color="primary" aria-label="Add new item button">
+  <mat-icon>add</mat-icon>
+</button>
+
