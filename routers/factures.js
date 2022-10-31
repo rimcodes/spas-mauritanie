@@ -41,6 +41,7 @@ router.post('/', async (req, res) => {
     let facture = new Facture({
         name: req.body.name,
         user: req.body.user,
+        type: req.body.type,
         number: req.body.number,
         recite: req.body.recite,
     })
@@ -60,6 +61,7 @@ router.put('/:id', async (req, res) => {
         {
             name: req.body.name,
             user: req.body.user,
+            type: req.body.type,
             number: req.body.number,
             recite: req.body.recite,
             updated_at: Date.now()
@@ -87,5 +89,39 @@ router.delete('/:id', (req, res) => {
     });
 
 });
+
+// Getting availble months 
+router.get('/months/users', async (req, res) => {
+    let filters = {};
+    try {
+        if(req.query.month && req.query.user) {
+            filters = { month: req.query.month, user: req.query.user }
+        }
+        const factures = await Facture.find(filters).populate('user', 'name email compt addres code ');
+        
+        res.status(200).send(factures);
+    } catch (error) {
+        res.status(500).json({ sucess: false, message: error});
+        
+    }
+
+});
+
+// Getting availble months 
+router.get('/months/:user', async (req, res) => {
+    let activeMonths = [];
+    try {
+        const factures = await Facture.find({ user: req.params.user});
+        
+        factures.forEach((fac) => {
+            activeMonths.push(fac.month);
+        })
+        res.status(200).send(activeMonths);
+    } catch (error) {
+        res.status(500).json({ sucess: false, message: error});
+        
+    }
+
+})
 
 module.exports = router;

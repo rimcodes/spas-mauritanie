@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Facture } from 'src/app/models/facture';
 import { Transaction } from 'src/app/models/transaction';
 import { FacturesService } from 'src/app/services/factures.service';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
 
 @Component({
@@ -11,20 +12,17 @@ import { TransactionsService } from 'src/app/services/transactions.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  @Input() cards!: Observable<Facture[]>;
+  @Input() cards!: Facture[];
 
   // Improve reusabiltity
   @Input() admin!: boolean;
 
   transactions!: Observable<Transaction[]>;
+  userId!: string | null;
 
-  constructor(private facturesService: FacturesService, private transactionsService: TransactionsService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.cards = this.facturesService.getFactures();
   }
 
-  getTransactions(factureId: string) {
-    this.transactions = this.transactionsService.getTransactionByName(factureId);
-  }
 }

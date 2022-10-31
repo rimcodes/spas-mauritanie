@@ -10,6 +10,27 @@
       </mat-grid-tile>
 
       <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <mat-label>رمز الزبون</mat-label>
+          <input matInput type="text" formControlName="code">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <mat-label>الملاحظات</mat-label>
+          <textarea matInput placeholder="اضف الملاحظات هنا ..." formControlName="notes"></textarea>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <mat-label>رقم الاعمال</mat-label>
+          <input matInput type="number" formControlName="chiferdaffaire">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
         <mat-form-field appearance="fill">
           <mat-label>كلمة السر</mat-label>
           <input matInput [type]="showPass ? 'text' : 'password'" formControlName="password">

@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent implements OnInit {
+  panelOpenState = false;
 
   constructor() { }
 

@@ -22,6 +22,7 @@ export class TransactionsComponent implements AfterViewInit, OnInit {
   @Input() pageSize = 2;
   @Input() transactions!: Transaction[];
   @Input() admin!: boolean;
+  @Input() isLTA = false;
 
   breakpoint = {
     cols: 6,
@@ -31,7 +32,7 @@ export class TransactionsComponent implements AfterViewInit, OnInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   //displayedColumns = this.admin ? ['date', 'name', 'quantity', 'number', 'delivery', 'payment', 'delete'] : ['date', 'name', 'quantity', 'number', 'delivery', 'payment'];
-  displayedColumns = ['date', 'name', 'quantity', 'number', 'delivery', 'payment', 'buttons'] ;
+  displayedColumns = ['name', 'quantity', 'nature', 'date', 'destination', 'number', 'price', 'payment', 'buttons'] ;
 
   constructor(
     private transactionsService: TransactionsService
@@ -51,6 +52,7 @@ export class TransactionsComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
+    this.checkFactureType();
 
     this.breakpoint = {
       cols: (window.innerWidth <= 760) ? 2 : 6,
@@ -78,6 +80,16 @@ export class TransactionsComponent implements AfterViewInit, OnInit {
         console.log(err.message);
 
       })
+  }
+
+  private checkFactureType() {
+    if (this.isLTA) {
+      this.displayedColumns = ['name', 'quantity', 'nature', 'date', 'destination', 'price', 'payment', 'buttons'] ;
+
+    } else {
+      this.displayedColumns = ['name', 'truck', 'conducteur', 'quantity', 'nature', 'date', 'perunit', 'price', 'payment', 'buttons'] ;
+
+    }
   }
 
 }

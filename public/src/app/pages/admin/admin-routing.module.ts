@@ -7,6 +7,7 @@ import { AdminComponent } from './admin.component';
 import { FactureFormComponent } from './pages/factures/facture-form/facture-form.component';
 import { UserFormComponent } from './pages/users/user-form/user-form.component';
 import { TransactionsFormComponent } from './pages/transactions/transactions-form/transactions-form.component';
+import { TransactionsComponent } from './pages/transactions/transactions.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'users/form/:id',
         component: UserFormComponent
+      },
+      {
+        path: 'transactions',
+        component: TransactionsComponent
       },
       {
         path: 'transactions/form',

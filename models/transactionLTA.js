@@ -1,21 +1,12 @@
 const mongoose = require('mongoose');
 
-const transactionSchema = mongoose.Schema({
+const transactionLTASchema = mongoose.Schema({
     name: {
         type: String,
         required: true
     },
-    truckNumber: {
+    poids: {
         type: String
-    },
-    conducteur: {
-        type: String
-    },
-    date: {
-        type: String,
-    },
-    destination: {
-        type: String,
     },
     price: {
         type: Number,
@@ -26,21 +17,16 @@ const transactionSchema = mongoose.Schema({
         ref: 'Facture',
         required: true
     },
-    quantity: {
+    nature: {
         type: Number,
         required: true,
     },
-    prixUnitaire: {
+    delivery: {
         type: String
     },
-    nature: {
-        type: String,
-    },
-    // delivery: {
-    //     type: String
-    // },
     payment: {
-        type: String,
+        type: Boolean,
+        default: false
     },
     created_at: {
         type: Date,
@@ -51,13 +37,13 @@ const transactionSchema = mongoose.Schema({
     }
 });
 
-transactionSchema.virtual('id').get(function () {
+transactionLTASchema.virtual('id').get(function () {
     return this._id.toHexString();
 });
 
-transactionSchema.set('toJSON', {
+transactionLTASchema.set('toJSON', {
     virtuals: true
 });
 
-exports.Transaction = mongoose.model('Transaction', transactionSchema);
-exports.transactionSchema = transactionSchema;
+exports.TransactionLTA = mongoose.model('TransactionLTA', transactionLTASchema);
+exports.transactionLTASchema = transactionLTASchema;

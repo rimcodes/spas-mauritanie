@@ -3,14 +3,13 @@
 }
 
 .mat-card {
-  overflow-x: auto;
+  overflow: auto;
 }
 
 .facture {
   width: 100%;
   display: flex;
   flex-direction: column;
-  // justify-content: flex-end;
   align-items:center;
 }
 

@@ -1,1 +1,13 @@
-<shared-dashboard></shared-dashboard>
+<mat-grid-list [cols]="breakpoint.cols" rowHeight="100px" gutterSize="20px">
+
+  <mat-grid-tile *ngFor="let card of months">
+    <mat-card [class]="!card.active ? 'active-month' : ''">
+      <mat-card-title>{{ card.name }}</mat-card-title>
+      <mat-card-actions>
+        <button mat-raised-button [disabled]="!card.active" [routerLink]="['/', 'factures', card.number]">التفاصيل</button>
+      </mat-card-actions>
+    </mat-card>
+
+  </mat-grid-tile>
+
+</mat-grid-list>

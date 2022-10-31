@@ -25,6 +25,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogOverviewComponent } from './dialog-overview/dialog-overview.component';
 import { MatSelectModule } from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
@@ -56,7 +59,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatListModule,
     MatDividerModule,
     MatIconModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatExpansionModule
   ]
 })
 export class AdminModule { }

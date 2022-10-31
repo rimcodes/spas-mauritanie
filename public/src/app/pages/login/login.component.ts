@@ -33,12 +33,13 @@ export class LoginComponent implements OnInit {
       if (this.logInFormGroup.invalid) return;
 
       this.auth
-          .login(this.loginForm['email'].value, this.loginForm['password'].value)
+          .login(this.loginForm['code'].value, this.loginForm['password'].value)
           .subscribe(
               (user) => {
                   this.authError = false;
                   this.localstorageService.setToken(user.token);
-                  this.localstorageService.setUserId(user.id)
+                  this.localstorageService.setUserId(user.id);
+
                   this.router.navigate(['/']);
               },
               (err) => {
@@ -58,7 +59,7 @@ export class LoginComponent implements OnInit {
   private _initLoginForm() {
       // ...
       this.logInFormGroup = this.formBuilder.group({
-          email: ['', [Validators.required, Validators.email]],
+          code: ['', [Validators.required]],
           password: ['', Validators.required]
       });
   }

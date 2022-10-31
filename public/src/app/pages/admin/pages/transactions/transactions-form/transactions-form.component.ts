@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from "@angular/common";
@@ -14,6 +14,8 @@ import { Transaction } from 'src/app/models/transaction';
   styleUrls: ['./transactions-form.component.scss']
 })
 export class TransactionsFormComponent implements OnInit {
+  factureType!: string;
+  isLTA = false;
   form!: FormGroup;
   isSubmitted = false;
   editMode = false;
@@ -39,7 +41,7 @@ export class TransactionsFormComponent implements OnInit {
     this._checkEditMode();
     this.breakpoint = {
       cols: (window.innerWidth <= 760) ? 2 : 6,
-      ration: (window.innerWidth <= 760) ? '1:0.5' : '2:1',
+      ration: (window.innerWidth <= 760) ? '1:0.3' : '2:1',
       phoneSize: (window.innerWidth <= 760)
     }
   }
@@ -105,13 +107,16 @@ export class TransactionsFormComponent implements OnInit {
   private _initForm() {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
-      description: [''],
+      truckNumber: [''],
+      conducteur: [''],
+      date: [''],
+      destination: [''],
       price: ['', Validators.required],
       facture: ['', Validators.required],
       quantity: ['', Validators.required],
-      number: ['', Validators.required],
-      delivery: [''],
-      payment: [false],
+      prixUnitaire: [''],
+      nature: [''],
+      payment: [''],
     });
   }
 
@@ -124,12 +129,15 @@ export class TransactionsFormComponent implements OnInit {
         this.transactionsService.getSingleTransaction(pararms['id'])
           .subscribe((res) => {
             this.transactionForm['name'].setValue(res.name);
-            this.transactionForm['description'].setValue(res.description);
+            this.transactionForm['truckNumber'].setValue(res.truckNumber);
+            this.transactionForm['conducteur'].setValue(res.conducteur);
+            this.transactionForm['date'].setValue(res.date);
+            this.transactionForm['destination'].setValue(res.destination);
             this.transactionForm['price'].setValue(res.price);
             this.transactionForm['facture'].setValue(res.facture);
             this.transactionForm['quantity'].setValue(res.quantity);
-            this.transactionForm['number'].setValue(res.number);
-            this.transactionForm['delivery'].setValue(res.delivery);
+            this.transactionForm['prixUnitaire'].setValue(res.prixUnitaire);
+            this.transactionForm['nature'].setValue(res.nature);
             this.transactionForm['payment'].setValue(res.payment);
           });
       }
@@ -140,9 +148,36 @@ export class TransactionsFormComponent implements OnInit {
     this.factures = this.facturesService.getFactures();
   }
 
+  changeFormType(type: string) {
+    if (type !== this.factureType) {
+      this.factureType = type;
+      switch(this.factureType) {
+        case 'LTA': {
+          this.isLTA = true;
+          break;
+        }
+        case 'TM': {
+          break;
+        }
+        case 'TR': {
+          this.isLTA = false;
+          break;
+        }
+        default: {
+          this.isLTA = false;
+          break;
+        }
+      }
+      console.log(type);
+    }
+
+
+
+  }
+
   onResize(event: any) {
     this.breakpoint.cols = (event.target.innerWidth <= 760) ? 2 : 6;
-    this.breakpoint.ration = (event.target.innerWidth <= 760) ? '1:0.5' : '2:1';
+    this.breakpoint.ration = (event.target.innerWidth <= 760) ? '1:0.3' : '2:1';
     this.breakpoint.phoneSize = (event.target.innerWidth <= 760)
   }
 

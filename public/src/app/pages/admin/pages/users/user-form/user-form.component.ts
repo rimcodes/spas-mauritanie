@@ -51,6 +51,9 @@ export class UserFormComponent implements OnInit {
       id: this.userPramId,
       name: this.userForm['name'].value,
       email: this.userForm['email'].value,
+      code: this.userForm['code'].value,
+      notes: this.userForm['notes'].value,
+      chiferdaffaire: this.userForm['chiferdaffaire'].value,
       password: this.userForm['password'].value,
       phone: this.userForm['phone'].value,
       isAdmin: this.userForm['isAdmin'].value,
@@ -108,7 +111,8 @@ export class UserFormComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       password: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: [''],
+      code: ['', Validators.required],
       phone: ['', Validators.required],
       isAdmin: [false, Validators.required],
       address: [''],
@@ -127,6 +131,9 @@ export class UserFormComponent implements OnInit {
         this.usersService.getSingleUser(pararms['id']).subscribe((user) => {
           this.userForm['name'].setValue(user.name);
           this.userForm['email'].setValue(user.email);
+          this.userForm['code'].setValue(user.code);
+          this.userForm['notes'].setValue(user.notes);
+          this.userForm['chiferdaffaire'].setValue(user.chiferdaffaire);
           this.userForm['phone'].setValue(user.phone);
           this.userForm['isAdmin'].setValue(user.isAdmin);
           this.userForm['address'].setValue(user.address);

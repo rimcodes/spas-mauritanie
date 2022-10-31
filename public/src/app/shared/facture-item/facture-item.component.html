@@ -1,7 +1,6 @@
 <mat-card class="dashboard-card" *ngIf="facture; else loading">
   <mat-card-header>
     <mat-card-title>
-      {{ facture.name.toUpperCase() }}
       <ng-container *ngIf="admin">
         <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
           <mat-icon>more_vert</mat-icon>
@@ -19,22 +18,27 @@
   <mat-card-content class="dashboard-card-content">
     <div class="facture">
       <div class="facture-header">
-        <div class="text">
-          <h2>الشركة العربية للخدمات</h2>
-        </div>
         <div class="image">
           <img src="assets/logo.png" alt="spas logo" width="72">
         </div>
+        <div class="text">
+          <h2>الشركة العربية للخدمات</h2>
+          <h5>مصلحة المحاسبة</h5>
+        </div>
       </div>
-      <span *ngIf="!facture.updated_at; else update"> تاريخ الانشاء: {{facture.created_at | date : 'mediumDate' }} </span>
+      <!-- <span *ngIf="!facture.updated_at; else update"> تاريخ الانشاء: {{facture.created_at | date : 'mediumDate' }} </span>
       <ng-template #update>
         <span> تاريخ آخر تعديل: {{facture.updated_at | date : 'mediumDate' }} </span>
-      </ng-template>
-      <p> رقم الفاتورة:  {{  facture.number }} </p>
-      <p>  اسم الزبون: {{facture.user.name}} </p>
-      <p> {{facture.recite}} </p>
+      </ng-template> -->
 
-      <app-transactions [admin]="admin" *ngIf="transactions" [transactions]="transactions"></app-transactions>
+      <p> الشهر:  {{  months[1 + +facture.month].name }} </p>
+      <p>  اسم الزبون: {{ facture.user.name }} </p>
+      <p>  الرمز: {{ facture.user.code }} </p>
+
+      <ng-container *ngIf="transactions">
+        <app-transactions [isLTA]="isLTA" [admin]="admin" [transactions]="transactions"></app-transactions>
+
+      </ng-container>
 
     </div>
   </mat-card-content>

@@ -2,6 +2,9 @@ export class User {
     id!: string;
     name!: string;
     email!: string;
+    code!: string;
+    notes!: string;
+    chiferdaffaire!: number;
     password!: string;
     phone!: string;
     token?: string;

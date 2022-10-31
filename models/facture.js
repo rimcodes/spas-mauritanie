@@ -5,6 +5,15 @@ const factureSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    type: {
+        type: String,
+        enum: ['LTA', 'TR', 'TM'],
+        default: 'TR',
+    },
+    month: {
+        type: String,
+        default: Date.getMonth + 1
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

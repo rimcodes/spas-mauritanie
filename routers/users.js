@@ -28,6 +28,7 @@ router.post(`/`, async (req, res) => {
     let user = new User({
         name: req.body.name,
         email: req.body.email,
+        code: req.body.code,
         passwordHash: bcrypt.hashSync(req.body.password, 10),
         phone: req.body.phone,
         address: req.body.address,
@@ -57,6 +58,7 @@ router.put('/:id', async (req, res) => {
         {
             name: req.body.name,
             email: req.body.email,
+            code: req.body.code,
             passwordHash: newPassword,
             phone: req.body.phone,
             isAdmin: req.body.isAdmin,
@@ -75,7 +77,7 @@ router.put('/:id', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ code: req.body.code });
 
     let secret = process.env.secret;
     if(!user) {
@@ -86,14 +88,15 @@ router.post('/login', async (req, res) => {
     if (user && bcrypt.compareSync( req.body.password, user.passwordHash)) {
         const token = jwt.sign(
             {
-                userId: user.id,
+                id: user.id,
                 isAdmin: user.isAdmin
             },
             secret,
             {expiresIn: '1d' }
         );
         res.status(200).send({
-            user: user.email,
+            user: user.code,
+            id: user.id,
             token: token
         });
     } else {
@@ -106,6 +109,7 @@ router.post(`/register`, async (req, res) => {
     let user = new User({
         name: req.body.name,
         email: req.body.email,
+        code: req.body.code,
         passwordHash: bcrypt.hashSync(req.body.password, 10),
         phone: req.body.phone,
         address: req.body.address,

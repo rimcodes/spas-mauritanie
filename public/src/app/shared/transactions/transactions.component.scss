@@ -1,5 +1,5 @@
 :host {
-  // width: 100%;
+  width: 100%;
   position: relative;
 }
 
@@ -8,11 +8,16 @@
 }
 
 .mat-column-name {
-  padding-right: 10px;
+  padding: 0 10px;
 }
 
 td {
   text-align: right;
+}
+
+.mat-cell {
+  padding: 12px;
+  margin: 0 10px;
 }
 
 .add-button {

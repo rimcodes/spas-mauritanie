@@ -3,13 +3,16 @@ import { Facture } from './facture';
 export class Transaction {
     id!: string;
     name!: string;
-    description?: string;
+    truckNumber?: string;
+    conducteur?: string;
+    date?: Date;
+    destination?: string;
     price!: number;
     facture!: Facture;
     quantity!: number;
-    number!: number;
-    delivery?: string;
-    payment?: boolean;
+    prixUnitaire!: number;
+    nature!: string;
+    payment?: string;
     created_at!: string;
     updated_at?: string;
 }

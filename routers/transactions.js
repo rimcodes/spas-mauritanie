@@ -38,7 +38,7 @@ router.get(`/:id`, async (req, res) => {
 
 // get the transaction with the specified id 
 router.get(`/factures/:facture`, async (req, res) => {
-    const transaction = await Transaction.find({ facture: req.params.facture });
+    const transaction = await Transaction.find({ facture: req.params.facture }).populate('facture');
     
 
     if (!transaction) {
@@ -56,13 +56,16 @@ router.post(`/`, async (req, res) => {
 
     let transaction = new Transaction({
         name: req.body.name,
-        description: req.body.description,
+        truckNumber: req.body.truckNumber,
+        conducteur: req.body.conducteur,
+        date: req.body.date,
+        destination: req.body.destination,
+        nature: req.body.nature,
         price: req.body.price,
         facture: req.body.facture,
         quantity: req.body.quantity,
-        number: req.body.number,
-        delivery: req.body.delivery,
-        payment: req.body.payment
+        prixUnitaire: req.body.prixUnitaire,
+        payment: req.body.payment,
     });
 
     transaction = await transaction.save();
@@ -93,12 +96,15 @@ router.put('/:id', async (req, res) => {
         req.params.id, 
         {
             name: req.body.name,
-            description: req.body.description,
+            truckNumber: req.body.truckNumber,
+            conducteur: req.body.conducteur,
+            date: req.body.date,
+            destination: req.body.destination,
+            nature: req.body.nature,
             price: req.body.price,
             facture: req.body.facture,
             quantity: req.body.quantity,
-            number: req.body.number,
-            delivery: req.body.delivery,
+            prixUnitaire: req.body.prixUnitaire,
             payment: req.body.payment,
             updated_at: Date.now()
         },

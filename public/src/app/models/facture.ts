@@ -1,8 +1,11 @@
+import { FactureType } from "./facture-type";
 import { User } from "./user";
 
 export class Facture {
     id!: string;
     name!: string;
+    month!: string;
+    type!: string;
     user!: User;
     number?: string;
     recite?: string;

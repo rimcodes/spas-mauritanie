@@ -100,7 +100,7 @@ export class TablesDataSource extends DataSource<Transaction> {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
         case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.number, +b.number, isAsc);
+        case 'price': return compare(+a.price, +b.price, isAsc);
         default: return 0;
       }
     });

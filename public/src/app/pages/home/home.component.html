@@ -1,0 +1,46 @@
+<div class="home-header">
+  <h2>الشركة العربية للخدمات العامة</h2>
+
+  <img src="assets/logo.png" alt="logo" width="144">
+</div>
+
+<ng-container *ngIf="user$ | async as user; else loading">
+
+  <mat-card >
+    <mat-card-title>
+      <p>
+        الزبون: {{ user.name }}
+      </p>
+      <p>رمز الزبون: {{ user.code }}</p>
+
+    </mat-card-title>
+    <mat-card-subtitle>
+      <p>العنوان: {{ user.address }}</p>
+    </mat-card-subtitle>
+    <mat-card-content>
+      <p>
+        الحساب المصرفي: {{ user.compt }}
+      </p>
+      <p>
+        البنك: {{ user.bank }}
+      </p>
+      <p>
+        رقم الاعمال: {{ user.chiferdaffaire }}
+      </p>
+      <div>
+        <p>الملاحظات:</p>
+        <p>
+          {{ user.notes }}
+        </p>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" routerLink="dashboard">التفاصيل</button>
+    </mat-card-actions>
+  </mat-card>
+
+</ng-container>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

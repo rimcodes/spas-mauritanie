@@ -5,10 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { SharedModule } from './shared/shared.module';
-import { LoadingComponent } from './shared/loading/loading.component';
+import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
@@ -17,12 +17,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { JwtInterceptor } from './services/jwt.interceptor';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -35,9 +38,12 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatIconModule,
     MatButtonModule,
+    MatCardModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

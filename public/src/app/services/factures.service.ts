@@ -18,6 +18,16 @@ export class FacturesService {
         return this.http.get<Facture[]>(this.apiURLFactures);
     }
 
+    // Getting the factures by user id from the backend
+    getFacturesByUser(userId: string): Observable<Facture[]> {
+        return this.http.get<Facture[]>(`${this.apiURLFactures}users/${userId}`);
+    }
+
+    // Getting the facture after filtering  from the backend
+    getfilteredFactures(userId: string, month: string ): Observable<Facture[]> {
+        return this.http.get<Facture[]>(`${this.apiURLFactures}months/users?month=${month}&user=${userId}`);
+    }
+
     // Getting a specific facture by id
     getSingleFacture(factureId: string): Observable<Facture> {
         return this.http.get<Facture>(`${this.apiURLFactures}${factureId}`);
@@ -44,4 +54,10 @@ export class FacturesService {
     deleteFacture(factureId: string): Observable<any> {
         return this.http.delete<any>(`${this.apiURLFactures}${factureId}`);
     }
+
+    // getting active months
+    getActiveMonths(userId: string) {
+      return this.http.get<any[]>(`${this.apiURLFactures}months/${userId}`)
+    }
+
 }

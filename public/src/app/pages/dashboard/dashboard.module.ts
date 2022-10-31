@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { MatCardModule } from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    SharedModule
+    MatCardModule,
+    MatGridListModule,
+    MatButtonModule
   ]
 })
 export class DashboardModule { }

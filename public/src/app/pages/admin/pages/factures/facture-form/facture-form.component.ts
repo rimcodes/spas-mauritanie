@@ -5,10 +5,8 @@ import { Observable, timer } from 'rxjs';
 import { Location } from "@angular/common";
 import { FacturesService } from 'src/app/services/factures.service';
 import { Facture } from 'src/app/models/facture';
-import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { UsersService } from 'src/app/services/users.service';
 import { User } from 'src/app/models/user';
-import { get } from 'mongoose';
 
 @Component({
   selector: 'app-facture-form',
@@ -25,7 +23,57 @@ export class FactureFormComponent implements OnInit {
     ration: string,
     phoneSize: boolean,
   }
-  users!: Observable<User[]>
+  users!: Observable<User[]>;
+  months = [
+    {
+      name: "يناير",
+      number: 1
+    },
+    {
+      name: "فبراير",
+      number: 2
+    },
+    {
+      name: "مارس",
+      number: 3
+    },
+    {
+      name: "ابريل",
+      number: 4
+    },
+    {
+      name: "مايو",
+      number: 5
+    },
+    {
+      name: "يونيو",
+      number: 6
+    },
+    {
+      name: "يوليو",
+      number: 7
+    },
+    {
+      name: "اغسطس",
+      number: 8
+    },
+    {
+      name: "سبتمبر",
+      number: 9
+    },
+    {
+      name: "اكتوبر",
+      number: 10
+    },
+    {
+      name: "نوفمبر",
+      number: 11
+    },
+    {
+      name: "ديسمبر",
+      number: 12
+    }
+  ]
 
   constructor(
     private formBuilder: FormBuilder,
@@ -109,8 +157,10 @@ export class FactureFormComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       user: ['', Validators.required],
+      month: ['', Validators.required],
       number: ['', Validators.required],
       recite: ['', Validators.required],
+      type: ['' , Validators.required],
     });
   }
   // method for cheching if an id was passed so that a facture get updated
@@ -124,6 +174,7 @@ export class FactureFormComponent implements OnInit {
         this.facturesService.getSingleFacture(pararms['id']).subscribe((facture) => {
           this.factureForm['name'].setValue(facture.name);
           this.factureForm['user'].setValue(facture.user);
+          this.factureForm['month'].setValue(facture.month);
           this.factureForm['number'].setValue(facture.number);
           this.factureForm['recite'].setValue(facture.recite);
 

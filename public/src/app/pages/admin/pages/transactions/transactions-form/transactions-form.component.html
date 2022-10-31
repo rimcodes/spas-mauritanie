@@ -1,71 +1,110 @@
 <mat-card class="form-card">
   <form [formGroup]="form">
-    <h2>فاتورة جديد</h2>
+    <h2>معاملة جديدة</h2>
     <mat-grid-list [cols]="breakpoint.cols" [rowHeight]="breakpoint.ration" (window:resize)="onResize($event)">
-      <mat-grid-tile colspan="2">
-        <mat-form-field>
-          <mat-label>الاسم</mat-label>
-          <input matInput type="text" formControlName="name">
-        </mat-form-field>
-      </mat-grid-tile>
-
-      <mat-grid-tile colspan="2">
-        <mat-form-field>
-          <mat-label> القيمة </mat-label>
-          <input matInput type="number" formControlName="price">
-        </mat-form-field>
-      </mat-grid-tile>
-
-      <mat-grid-tile colspan="2">
+      <!-- facture -->
+      <mat-grid-tile [colspan]="breakpoint.phoneSize ? 2 : 6">
         <mat-form-field>
           <mat-label>الفاتورة</mat-label>
           <mat-select  formControlName="facture">
             <!-- <mat-option cheched *ngIf="editMode" [value]="'sxsc'">
               user
             </mat-option> -->
-            <mat-option *ngFor="let facture of factures | async" [value]="facture.id">
+            <mat-option *ngFor="let facture of factures | async" [value]="facture.id" (click)="changeFormType(facture.type)">
               {{facture.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
-
+      <!-- name -->
       <mat-grid-tile colspan="2">
         <mat-form-field>
-          <mat-label> الكمية</mat-label>
+          <mat-label>
+            {{ isLTA ? 'N LTA' :  ' رقم الجرار'}}
+          </mat-label>
+          <input matInput type="text" formControlName="name">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <!-- nature -->
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <mat-label> نوعية الشحنة  </mat-label>
+          <input matInput type="text" formControlName="nature">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <ng-container *ngIf="!isLTA; else LTAFields">
+        <!-- truck number -->
+        <mat-grid-tile colspan="2" *ngIf="!isLTA">
+          <mat-form-field>
+            <mat-label>رقم المقطورة</mat-label>
+            <input matInput type="text" formControlName="truckNumber">
+          </mat-form-field>
+        </mat-grid-tile>
+        <!-- conducteur -->
+        <mat-grid-tile colspan="2" *ngIf="!isLTA">
+          <mat-form-field>
+            <mat-label>اسم السائق</mat-label>
+            <input matInput type="text" formControlName="conducteur">
+          </mat-form-field>
+        </mat-grid-tile>
+        <!-- prix Unitaire -->
+        <mat-grid-tile colspan="2" *ngIf="!isLTA">
+          <mat-form-field>
+            <mat-label>ثمن الطن </mat-label>
+            <input matInput type="number" formControlName="prixUnitaire">
+          </mat-form-field>
+        </mat-grid-tile>
+      </ng-container>
+
+      <ng-template #LTAFields>
+        <!-- destination -->
+        <mat-grid-tile colspan="2">
+          <mat-form-field>
+            <mat-label>الوجهة Destination </mat-label>
+            <input matInput type="text" formControlName="destination">
+          </mat-form-field>
+        </mat-grid-tile>
+
+      </ng-template>
+
+      <!-- date -->
+      <mat-grid-tile colspan="2">
+        <mat-form-field appearance="fill">
+          <mat-label>
+            {{ isLTA ? 'التاريخ' : 'الوصول' }}
+          </mat-label>
+          <input matInput [matDatepicker]="picker"formControlName="date" >
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <!-- price  -->
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <mat-label> المبلغ </mat-label>
+          <input matInput type="number" formControlName="price">
+        </mat-form-field>
+      </mat-grid-tile>
+      <!-- quantity -->
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
+          <mat-label>
+            {{ isLTA ? 'الوزن ' : ' الحمولة' }}
+          </mat-label>
           <input matInput type="number" formControlName="quantity">
         </mat-form-field>
       </mat-grid-tile>
-
+      <!-- payment -->
       <mat-grid-tile colspan="2">
         <mat-form-field>
-          <mat-label> رقم المعاملة </mat-label>
-          <input matInput type="number" formControlName="number">
+          <mat-label>الدفع</mat-label>
+          <input matInput type="text" formControlName="payment">
         </mat-form-field>
       </mat-grid-tile>
 
-      <mat-grid-tile colspan="2">
-        <mat-form-field>
-          <mat-label> حالة التوصيل </mat-label>
-          <input matInput type="text" formControlName="delivery">
-        </mat-form-field>
-      </mat-grid-tile>
-
-      <mat-grid-tile colspan="2">
-        <mat-slide-toggle
-          color="primary"
-          formControlName="payment"
-        >
-          تم الدفع
-        </mat-slide-toggle>
-      </mat-grid-tile>
-
-      <mat-grid-tile [colspan]="breakpoint.phoneSize ? 2 : 4">
-        <mat-form-field>
-          <mat-label>التفاصيل</mat-label>
-          <textarea matInput placeholder="اضف تفاصيل ..." formControlName="description"></textarea>
-        </mat-form-field>
-      </mat-grid-tile>
 
     </mat-grid-list>
 
@@ -76,4 +115,3 @@
     </button>
   </form>
 </mat-card>
-

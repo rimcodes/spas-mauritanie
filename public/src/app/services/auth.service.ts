@@ -18,9 +18,9 @@ export class AuthService {
         private router: Router
     ) {}
 
-    login(email: string, password: string): Observable<User> {
+    login(code: string, password: string): Observable<User> {
         return this.http.post<User>(`${this.apiUserURL}/login`, {
-            email,
+            code,
             password
         });
     }
