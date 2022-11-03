@@ -16,10 +16,25 @@
   z-index: 1;
 }
 
+.nav-items {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .hero-link {
   cursor: pointer;
+  text-align: center;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
 }
 
 .hero-link:hover {
   color: #083050;
+}
+
+.sub-heading {
+  float: left;
 }

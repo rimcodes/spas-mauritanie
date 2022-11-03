@@ -24,13 +24,17 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <div class="hero-link" routerLink="">
-        <h1>SAPS MAURITANIA</h1>
-        <h1>الشركة الموريتانية للخدمات العامة</h1>
-      </div>
+      <div class="nav-items">
+        <div></div>
+        <div class="hero-link" routerLink="">
+          <span>SAPS MAURITANIA</span>
+          <p>الشركة العربية للخدمات العامة</p>
+        </div>
 
-      <img src="assets/logo.png" alt="spas mauritanie logo" width="74">
+        <img src="assets/logo.png" alt="spas mauritanie logo" width="74">
+      </div>
     </mat-toolbar>
+    <span class="sub-heading">مصلحة المحاسبة</span>
     <!-- Add Content Here -->
     <ng-content></ng-content>
   </mat-sidenav-content>

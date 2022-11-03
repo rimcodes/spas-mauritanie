@@ -25,25 +25,27 @@ router.get('/:id', async (req, res) => {
 
 router.post(`/`, async (req, res) => {
 
-    let user = new User({
-        name: req.body.name,
-        email: req.body.email,
-        code: req.body.code,
-        passwordHash: bcrypt.hashSync(req.body.password, 10),
-        phone: req.body.phone,
-        address: req.body.address,
-        bank: req.body.bank,
-        compt: req.body.zip,
-        notes: req.body.notes,
-        chifer: req.body.chifer
-    });
-
-    user = await user.save();
-
-    if(!user)
-    return res.status(500).send('The user cannot be created');
-
-    res.send(user);
+    try {
+        let user = new User({
+            name: req.body.name,
+            email: req.body.email,
+            code: req.body.code,
+            passwordHash: bcrypt.hashSync(req.body.password, 10),
+            phone: req.body.phone,
+            address: req.body.address,
+            bank: req.body.bank,
+            compt: req.body.zip,
+            notes: req.body.notes,
+            chifer: req.body.chifer
+        });
+        
+        user = await user.save();
+        res.send(user);
+        
+    } catch (error) {
+    return res.status(500).send({message: 'The user cannot be created', error: error});
+    
+    }
 } );
 
 router.put('/:id', async (req, res) => {
