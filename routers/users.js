@@ -33,7 +33,9 @@ router.post(`/`, async (req, res) => {
         phone: req.body.phone,
         address: req.body.address,
         bank: req.body.bank,
-        compt: req.body.zip
+        compt: req.body.zip,
+        notes: req.body.notes,
+        chifer: req.body.chifer
     });
 
     user = await user.save();
@@ -65,6 +67,8 @@ router.put('/:id', async (req, res) => {
             address: req.body.address,
             bank: req.body.bank,
             compt: req.body.compt,
+            notes: req.body.notes,
+            chifer: req.body.chifer
         },
         { new: true }
         );

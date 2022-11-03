@@ -8,6 +8,7 @@ import { FactureFormComponent } from './pages/factures/facture-form/facture-form
 import { UserFormComponent } from './pages/users/user-form/user-form.component';
 import { TransactionsFormComponent } from './pages/transactions/transactions-form/transactions-form.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { UsersComponent } from './pages/users/users.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,14 @@ const routes: Routes = [
       {
         path: 'users/form',
         component: UserFormComponent
+      },
+      {
+        path: 'users',
+        component: UsersComponent
+      },
+      {
+        path: 'users/:id',
+        component: UsersComponent
       },
       {
         path: 'users/form/:id',

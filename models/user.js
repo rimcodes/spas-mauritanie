@@ -13,6 +13,12 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    notes: {
+        type: String
+    },
+    chifer: {
+        type: Number
+    },
     passwordHash: {
         type: String,
         required: true

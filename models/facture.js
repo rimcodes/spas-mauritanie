@@ -11,8 +11,8 @@ const factureSchema = mongoose.Schema({
         default: 'TR',
     },
     month: {
-        type: String,
-        default: Date.getMonth + 1
+        type: Number,
+        default: 1
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

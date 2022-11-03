@@ -15,7 +15,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar>
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -24,7 +24,11 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>spas</span>
+      <div class="hero-link" routerLink="">
+        <h1>SAPS MAURITANIA</h1>
+        <h1>الشركة الموريتانية للخدمات العامة</h1>
+      </div>
+
       <img src="assets/logo.png" alt="spas mauritanie logo" width="74">
     </mat-toolbar>
     <!-- Add Content Here -->

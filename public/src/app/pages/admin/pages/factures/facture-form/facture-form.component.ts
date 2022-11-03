@@ -7,6 +7,7 @@ import { FacturesService } from 'src/app/services/factures.service';
 import { Facture } from 'src/app/models/facture';
 import { UsersService } from 'src/app/services/users.service';
 import { User } from 'src/app/models/user';
+import { MONTHS } from 'src/app/models/months';
 
 @Component({
   selector: 'app-facture-form',
@@ -24,56 +25,7 @@ export class FactureFormComponent implements OnInit {
     phoneSize: boolean,
   }
   users!: Observable<User[]>;
-  months = [
-    {
-      name: "يناير",
-      number: 1
-    },
-    {
-      name: "فبراير",
-      number: 2
-    },
-    {
-      name: "مارس",
-      number: 3
-    },
-    {
-      name: "ابريل",
-      number: 4
-    },
-    {
-      name: "مايو",
-      number: 5
-    },
-    {
-      name: "يونيو",
-      number: 6
-    },
-    {
-      name: "يوليو",
-      number: 7
-    },
-    {
-      name: "اغسطس",
-      number: 8
-    },
-    {
-      name: "سبتمبر",
-      number: 9
-    },
-    {
-      name: "اكتوبر",
-      number: 10
-    },
-    {
-      name: "نوفمبر",
-      number: 11
-    },
-    {
-      name: "ديسمبر",
-      number: 12
-    }
-  ]
+  months = MONTHS;
 
   constructor(
     private formBuilder: FormBuilder,

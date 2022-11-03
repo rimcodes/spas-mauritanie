@@ -1,24 +1,55 @@
-<h1 class="mat-h1">لوحة تحكم الادارة</h1>
+<admin-toolbar></admin-toolbar>
+
+<mat-chip-list aria-label="Fish selection">
+  <mat-chip *ngFor="let month of months" [class]="month.active ? 'inactive-month' : ''"  (click)="monthSelected(month.number)">{{ month.name }}</mat-chip>
+</mat-chip-list>
+
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="الزبناء">
     <mat-card class="form-card" (window:resize)="onResize($event)">
-      <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
-        <mat-icon [routerLink]="['users', 'form']">add</mat-icon>
-      </button>
+      <div class="actions">
+        <button mat-fab color="primary">
+          <mat-icon [routerLink]="['users', 'form']">add</mat-icon>
+        </button>
+        <button mat-fab color="accent">
+          <mat-icon>filter_alt</mat-icon>
+        </button>
+        <div>
+          <form>
+            <mat-form-field>
+              <mat-label>ابحث عن مستخدم بالاسم</mat-label>
+              <input type="text"
+                placeholder="ابحث..."
+                aria-label="Search by user name"
+                matInput
+                [formControl]="searchForm"
+                [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of users$ | async" [value]="option">
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+
+        </div>
+      </div>
       <mat-list role="list">
         <mat-list-item>
           <div class="users-list">
             <h3> الاسم </h3>
             <div> مدير </div>
             <ng-container *ngIf="!breakpoint">
-              <p> البريد الالكتروني </p>
+              <p> الرمز</p>
               <small>تاريخ الانشاء </small>
             </ng-container>
+            <div></div>
             <div></div>
           </div>
 
         </mat-list-item>
-        <mat-list-item role="listitem" *ngFor="let user of users | async">
+
+        <mat-list-item role="listitem" *ngFor="let user of users$ | async">
           <div class="users-list">
             <h3>{{ user.name }}</h3>
             <div>
@@ -28,34 +59,71 @@
                 مدير
               </mat-slide-toggle>
             </div>
-            <ng-container *ngIf="!breakpoint">
-              <p> {{ user.email }} </p>
+            <ng-container>
+              <p> {{ user.code }} </p>
 
               <small> {{ user.created_at | date }} </small>
             </ng-container>
 
             <div>
-              <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+              <button mat-mini-fab color="primary">
                 <mat-icon [routerLink]="['users', 'form', user.id]">edit</mat-icon>
               </button>
-              <button mat-mini-fab color="warn" aria-label="Example icon button with a delete icon">
+              <button mat-mini-fab color="warn">
                 <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+
+            <div style="justify-self: end;">
+              <button mat-mini-fab color="clear">
+                <mat-icon [routerLink]="['users', user.id]">ios_share</mat-icon>
               </button>
             </div>
 
           </div>
           <mat-divider></mat-divider>
         </mat-list-item>
+
+        <ng-container *ngIf="!users$">
+          <mat-list-item *ngFor="let user of users">
+            <div class="users-list">
+              <h3>{{ user.name }}</h3>
+              <div>
+                <mat-slide-toggle
+                  color="primary"
+                  [checked]="user.isAdmin">
+                  مدير
+                </mat-slide-toggle>
+              </div>
+              <p> {{ user.code }} </p>
+
+              <small> {{ user.created_at | date }} </small>
+
+              <div>
+                <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+                  <mat-icon [routerLink]="['users', 'form', user.id]">edit</mat-icon>
+                </button>
+                <button mat-mini-fab color="warn" aria-label="Example icon button with a delete icon">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+
+            </div>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+        </ng-container>
+
       </mat-list>
+      <app-loading *ngIf="!users && !users$"></app-loading>
     </mat-card>
 
   </mat-tab>
   <mat-tab label="الفاتورات">
-    <shared-dashboard [admin]="true" *ngIf="factures$ | async as factures;else loading" ></shared-dashboard>
+    <shared-dashboard [admin]="true" *ngIf="factures$ | async as factures;else loading" [cards]="factures"></shared-dashboard>
     <ng-template #loading>
       <app-loading></app-loading>
     </ng-template>
   </mat-tab>
-  <mat-tab label="آخر الاحداث"> Content 3 </mat-tab>
+  <!-- <mat-tab label="آخر الاحداث"> Content 3 </mat-tab> -->
 </mat-tab-group>
 

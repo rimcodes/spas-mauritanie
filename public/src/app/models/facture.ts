@@ -4,7 +4,7 @@ import { User } from "./user";
 export class Facture {
     id!: string;
     name!: string;
-    month!: string;
+    month!: number;
     type!: string;
     user!: User;
     number?: string;

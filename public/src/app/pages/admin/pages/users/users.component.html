@@ -1,1 +1,6 @@
-<p>users works!</p>
+<admin-toolbar></admin-toolbar>
+
+<shared-dashboard *ngIf="factures$ | async as factures; else loading" [cards]="factures" [admin]="true"></shared-dashboard>
+<ng-template #loading>
+  <app-loading #loading></app-loading>
+</ng-template>

@@ -24,7 +24,7 @@ export class FacturesService {
     }
 
     // Getting the facture after filtering  from the backend
-    getfilteredFactures(userId: string, month: string ): Observable<Facture[]> {
+    getfilteredFactures(userId?: string, month?: string | number ): Observable<Facture[]> {
         return this.http.get<Facture[]>(`${this.apiURLFactures}months/users?month=${month}&user=${userId}`);
     }
 

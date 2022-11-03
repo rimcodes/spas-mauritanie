@@ -26,3 +26,12 @@ h1 {
 .users-list > div {
   flex: 1;
 }
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inactive-month {
+  background-color: #999;
+}

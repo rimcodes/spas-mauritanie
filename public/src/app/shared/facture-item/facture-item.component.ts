@@ -77,7 +77,7 @@ export class FactureItemComponent implements OnInit {
     this.transactionService.getTransactionByName(this.facture.id)
       .subscribe((res) => {
         this.transactions = res;
-        this.isLTA = res[0].facture.type === 'LTA';
+        this.isLTA = res[0]?.facture.type === 'LTA';
         res.forEach((item) => {
           this.montant += item.price;
         })

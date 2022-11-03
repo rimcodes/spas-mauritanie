@@ -28,7 +28,10 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { AdminToolbarComponent } from './admin-toolbar/admin-toolbar.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     FacturesComponent,
     TransactionsComponent,
     TransactionsFormComponent,
-    DialogOverviewComponent
+    DialogOverviewComponent,
+    AdminToolbarComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +66,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatToolbarModule,
+    MatAutocompleteModule,
+    MatChipsModule
   ]
 })
 export class AdminModule { }

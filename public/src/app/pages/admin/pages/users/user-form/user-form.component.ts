@@ -53,7 +53,7 @@ export class UserFormComponent implements OnInit {
       email: this.userForm['email'].value,
       code: this.userForm['code'].value,
       notes: this.userForm['notes'].value,
-      chiferdaffaire: this.userForm['chiferdaffaire'].value,
+      chifer: this.userForm['chifer'].value,
       password: this.userForm['password'].value,
       phone: this.userForm['phone'].value,
       isAdmin: this.userForm['isAdmin'].value,
@@ -115,6 +115,8 @@ export class UserFormComponent implements OnInit {
       code: ['', Validators.required],
       phone: ['', Validators.required],
       isAdmin: [false, Validators.required],
+      notes: [''],
+      chifer: [''],
       address: [''],
       bank: [''],
       compt: [''],
@@ -133,7 +135,7 @@ export class UserFormComponent implements OnInit {
           this.userForm['email'].setValue(user.email);
           this.userForm['code'].setValue(user.code);
           this.userForm['notes'].setValue(user.notes);
-          this.userForm['chiferdaffaire'].setValue(user.chiferdaffaire);
+          this.userForm['chifer'].setValue(user.chifer);
           this.userForm['phone'].setValue(user.phone);
           this.userForm['isAdmin'].setValue(user.isAdmin);
           this.userForm['address'].setValue(user.address);

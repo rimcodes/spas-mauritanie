@@ -40,10 +40,12 @@ router.get('/:id', async(req, res) => {
 router.post('/', async (req, res) => {
     let facture = new Facture({
         name: req.body.name,
-        user: req.body.user,
         type: req.body.type,
+        month: req.body.month,
+        user: req.body.user,
         number: req.body.number,
         recite: req.body.recite,
+        created_at: Date.now(),
     })
     facture = await facture.save();
 
@@ -60,8 +62,9 @@ router.put('/:id', async (req, res) => {
         req.params.id, 
         {
             name: req.body.name,
-            user: req.body.user,
             type: req.body.type,
+            month: req.body.month,
+            user: req.body.user,
             number: req.body.number,
             recite: req.body.recite,
             updated_at: Date.now()
@@ -94,11 +97,27 @@ router.delete('/:id', (req, res) => {
 router.get('/months/users', async (req, res) => {
     let filters = {};
     try {
-        if(req.query.month && req.query.user) {
-            filters = { month: req.query.month, user: req.query.user }
+        const query = Facture.find();
+        if (req.query.month) {
+            // filters = { month: req.query.month, user: req.query.user }
+            query.find({ month: req.query.month }).populate('user', 'name email compt addres code ');
         }
-        const factures = await Facture.find(filters).populate('user', 'name email compt addres code ');
-        
+        if (req.query.user) {
+            query.find({ user: req.query.user }).populate('user', 'name email compt addres code ');
+        }
+        if(req.query.maxmonth && req.query.minmonth) {
+            query.find({ month: { $lte: req.query.maxmonth, $gte: req.query.minmonth } }).populate('user', 'name email compt addres code ');
+        }
+        if (req.query.minmonth && !req.query.maxmonth) {
+            query.find({ month: { $gte: req.query.minmonth } }).populate('user', 'name email compt addres code ');
+            
+        }
+        if(req.query.maxmonth && !req.query.minmonth) {
+            query.find({ month: { $lte: req.query.maxmonth } }).populate('user', 'name email compt addres code ');
+        }
+        // const factures = await Facture.find(filters).populate('user', 'name email compt addres code ');
+        query.getFilter();
+        const factures = await query.exec();
         res.status(200).send(factures);
     } catch (error) {
         res.status(500).json({ sucess: false, message: error});

@@ -16,7 +16,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { LoadingComponent } from './loading/loading.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { TablesComponent } from './tables/tables.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -32,7 +31,6 @@ import { RouterModule } from '@angular/router';
     ToolBarComponent,
     DashboardComponent,
     LoadingComponent,
-    TablesComponent,
   ],
   imports: [
     CommonModule,

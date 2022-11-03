@@ -4,7 +4,7 @@ export class User {
     email!: string;
     code!: string;
     notes!: string;
-    chiferdaffaire!: number;
+    chifer!: number;
     password!: string;
     phone!: string;
     token?: string;
