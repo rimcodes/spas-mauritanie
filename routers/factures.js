@@ -98,12 +98,15 @@ router.get('/months/users', async (req, res) => {
     let filters = {};
     try {
         const query = Facture.find();
-        if (req.query.month) {
+        if (req.query.month & !req.query.user) {
             // filters = { month: req.query.month, user: req.query.user }
             query.find({ month: req.query.month }).populate('user', 'name email compt addres code ');
         }
-        if (req.query.user) {
+        if (req.query.user && !req.query.month) {
             query.find({ user: req.query.user }).populate('user', 'name email compt addres code ');
+        }
+        if (req.query.month && req.query.user) {
+            query.find({ month: req.query.month, user: req.query.user }).populate('user', 'name email compt addres code ');
         }
         if(req.query.maxmonth && req.query.minmonth) {
             query.find({ month: { $lte: req.query.maxmonth, $gte: req.query.minmonth } }).populate('user', 'name email compt addres code ');
