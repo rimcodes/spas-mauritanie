@@ -6,7 +6,7 @@ const router = express.Router();
 // get request for all factures in the db
 router.get('/', async (req, res) => {
     try {
-        const factures = await Facture.find().populate('user', 'name email compt address chifer');
+        const factures = await Facture.find().populate('user', 'name email compt address chifer code notes');
         res.status(200).send(factures);
         
     } catch (error) {
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 // Get facture using the user id
 router.get('/users/:user', async (req, res) => {
     try {
-        const factures = await Facture.find( { user: req.params.user }).populate('user', 'name email compt addres chifer');
+        const factures = await Facture.find( { user: req.params.user }).populate('user', 'name email compt addres chifer code notes');
         res.status(200).send(factures);
         
     } catch (error) {
@@ -31,7 +31,7 @@ router.get('/users/:user', async (req, res) => {
 // get request for single facture based on id parameter in the url
 router.get('/:id', async(req, res) => {
     try {
-        const facture = await Facture.findById(req.params.id).populate('user', 'name email compt address chifer');
+        const facture = await Facture.findById(req.params.id).populate('user', 'name email compt address chifer code notes');
         res.status(200).send(facture);
         
     } catch (error) {
