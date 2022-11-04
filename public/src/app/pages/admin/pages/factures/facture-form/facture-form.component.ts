@@ -17,7 +17,8 @@ import { MONTHS } from 'src/app/models/months';
 export class FactureFormComponent implements OnInit {
   form!: FormGroup;
   isSubmitted = false;
-  editMode = false;
+  valid = true;
+  editMode = true;
   pramId = '';
   breakpoint!: {
     cols: number,
@@ -50,8 +51,11 @@ export class FactureFormComponent implements OnInit {
   onSubmit() {
     this.isSubmitted = true;
     if (this.form.invalid) {
+      this.valid = false;
       return;
     }
+
+    this.valid = true;
 
     const factureFormData = new FormData();
 

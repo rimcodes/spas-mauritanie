@@ -5,78 +5,86 @@ const router = express.Router();
 
 // get request for all factures in the db
 router.get('/', async (req, res) => {
-    const factures = await Facture.find().populate('user', 'name email compt address');
-
-    if(!factures) {
+    try {
+        const factures = await Facture.find().populate('user', 'name email compt address chifer');
+        res.status(200).send(factures);
+        
+    } catch (error) {
         res.status(500).json({ success: false});
-    };
-
-    res.status(200).send(factures);
+    }
 });
 
 // Get facture using the user id
 router.get('/users/:user', async (req, res) => {
-    const factures = await Facture.find( { user: req.params.user }).populate('user', 'name email compt addres');
-
-    if(!factures) {
+    try {
+        const factures = await Facture.find( { user: req.params.user }).populate('user', 'name email compt addres chifer');
+        res.status(200).send(factures);
+        
+    } catch (error) {
         res.status(500).json({ sucess: false});
-    };
+        
+    }
 
-    res.status(200).send(factures);
 });
 
 
 // get request for single facture based on id parameter in the url
 router.get('/:id', async(req, res) => {
-    const facture = await Facture.findById(req.params.id).populate('user', 'name email compt address');
-
-    if(!facture) {
+    try {
+        const facture = await Facture.findById(req.params.id).populate('user', 'name email compt address chifer');
+        res.status(200).send(facture);
+        
+    } catch (error) {
         res.status(500).json({ message: 'The facture with the given ID was not  found.'})
+        
     }
-    res.status(200).send(facture);
+    
 });
 
 // creating a facture and adding it to the db
 router.post('/', async (req, res) => {
-    let facture = new Facture({
-        name: req.body.name,
-        type: req.body.type,
-        month: req.body.month,
-        user: req.body.user,
-        number: req.body.number,
-        recite: req.body.recite,
-        created_at: Date.now(),
-    })
-    facture = await facture.save();
-
-    if(!facture){
-        return res.status(404).send('The facture could not be created!');
-    };
-
-    res.send(facture);
-});
-
-// updating a specific facture 
-router.put('/:id', async (req, res) => {
-    const facture = await Facture.findByIdAndUpdate(
-        req.params.id, 
-        {
+    try {
+        let facture = new Facture({
             name: req.body.name,
             type: req.body.type,
             month: req.body.month,
             user: req.body.user,
             number: req.body.number,
             recite: req.body.recite,
-            updated_at: Date.now()
-        },
-        { new: true }
-    );
-
-    if(!facture) {
-        return res.status(400).send('the facture cannot be updated');
+            created_at: Date.now(),
+        })
+        facture = await facture.save();
+        res.send(facture);
+        
+    } catch (error) {
+        return res.status(404).send('The facture could not be created!');
+        
     }
 
-    res.status(200).send(facture);
+});
+
+// updating a specific facture 
+router.put('/:id', async (req, res) => {
+    try {
+        const facture = await Facture.findByIdAndUpdate(
+            req.params.id, 
+            {
+                name: req.body.name,
+                type: req.body.type,
+                month: req.body.month,
+                user: req.body.user,
+                number: req.body.number,
+                recite: req.body.recite,
+                updated_at: Date.now()
+            },
+            { new: true }
+        );
+        res.status(200).send(facture);
+    } catch (error) {
+        return res.status(400).send('the facture cannot be updated');
+        
+    }
+
 });
 
 // deleting a specific facture

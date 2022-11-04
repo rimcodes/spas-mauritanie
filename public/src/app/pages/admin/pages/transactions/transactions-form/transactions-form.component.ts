@@ -18,6 +18,7 @@ export class TransactionsFormComponent implements OnInit {
   isLTA = false;
   form!: FormGroup;
   isSubmitted = false;
+  valid = true;
   editMode = false;
   pramId = '';
   breakpoint!: {
@@ -49,8 +50,11 @@ export class TransactionsFormComponent implements OnInit {
   onSubmit() {
     this.isSubmitted = true;
     if (this.form.invalid) {
+      this.valid = false;
       return;
     }
+
+    this.valid = true;
 
     const transactionFormData = new FormData();
 

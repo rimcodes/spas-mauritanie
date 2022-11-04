@@ -1,5 +1,5 @@
 <mat-card class="form-card">
-  <form [formGroup]="form">
+  <form [formGroup]="form" [class]="isSubmitted && valid ? 'loading-form': ''">
     <h2>فاتورة جديدة</h2>
     <mat-grid-list [cols]="breakpoint.cols" [rowHeight]="breakpoint.ration" (window:resize)="onResize($event)">
       <mat-grid-tile colspan="2">
@@ -68,10 +68,14 @@
 
     </mat-grid-list>
 
-    <button mat-raised-button (click)="onSubmit()" color="primary">
+    <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="isSubmitted && valid">
       {{
          editMode ? 'تعديل' : 'إنشاء'
       }}
     </button>
   </form>
+  <div class="loading-cnt" *ngIf="isSubmitted && valid">
+    <app-loading></app-loading>
+    الرجاء الانتظار ...
+  </div>
 </mat-card>

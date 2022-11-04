@@ -36,6 +36,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin: 20px;
 }
 
+/* Global styles for form loading and submition */
+.loading-form {
+  opacity: 0.3;
+}
+
+.loading-cnt {
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
 
 @media screen and (max-width: 760px) {
   .form-card {

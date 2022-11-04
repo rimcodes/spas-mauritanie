@@ -15,6 +15,7 @@ export class UserFormComponent implements OnInit {
 
   form!: FormGroup;
   isSubmitted = false;
+  valid = true;
   editMode = false;
   userPramId = '';
   showPass = false;
@@ -45,8 +46,12 @@ export class UserFormComponent implements OnInit {
   onSubmit() {
     this.isSubmitted = true;
     if (this.form.invalid) {
+      this.valid = false;
       return;
     }
+
+    this.valid = true;
+
     const user: User = {
       id: this.userPramId,
       name: this.userForm['name'].value,
@@ -111,7 +116,7 @@ export class UserFormComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       password: ['', Validators.required],
-      email: [''],
+      email: ['', Validators.required],
       code: ['', Validators.required],
       phone: ['', Validators.required],
       isAdmin: [false, Validators.required],
