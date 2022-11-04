@@ -18,83 +18,47 @@ router.get(`/`, async (req, res) => {
         
     } catch (error) {
         console.log("Erro loged in the console: ", error);
-    }
-
-    if (!transactionList) {
         res.status(500).json({success: false});
     }
+
     res.send(transactionList);
 } );
 
 // get the transaction with the specified id 
 router.get(`/:id`, async (req, res) => {
-    const transaction = await Transaction.findById(req.params.id).populate('facture');
-
-    if (!transaction) {
+    try {
+        const transaction = await Transaction.findById(req.params.id).populate('facture');
+        res.send(transaction);
+        
+    } catch (error) {
         res.status(500).json({success: false, message: 'There is no transaction with the given id'});
+        
     }
-    res.send(transaction);
+
 } );
 
 // get the transaction with the specified id 
 router.get(`/factures/:facture`, async (req, res) => {
-    const transaction = await Transaction.find({ facture: req.params.facture }).populate('facture');
     
-
-    if (!transaction) {
+    try {
+        const transaction = await Transaction.find({ facture: req.params.facture }).populate('facture');
+        res.send(transaction);
+       
+    } catch (error) {
         res.status(500).json({success: false, message: 'There is no transaction with the given id'});
+        
     }
-    res.send(transaction);
+    
 } );
 
 // posting transactions to the database 
 router.post(`/`, async (req, res) => {
-
-    // Making sure the facture exists
-    const facture = await Facture.findById(req.body.facture);
-    if(!facture) return res.status(400).send('Invalid Facture');
-
-    let transaction = new Transaction({
-        name: req.body.name,
-        truckNumber: req.body.truckNumber,
-        conducteur: req.body.conducteur,
-        date: req.body.date,
-        destination: req.body.destination,
-        nature: req.body.nature,
-        price: req.body.price,
-        facture: req.body.facture,
-        quantity: req.body.quantity,
-        prixUnitaire: req.body.prixUnitaire,
-        payment: req.body.payment,
-    });
-
-    transaction = await transaction.save();
-
-    if(!transaction)
-    return res.status(500).send('The transaction cannot be created ');
-
-    res.send(transaction);
-} );
-
-// updating a specific transaction
-router.put('/:id', async (req, res) => {
-    if(!mongoose.isValidObjectId(req.params.id)){
-        res.status(400).send('Invalid transaction id');
-    }
-
-    const facture = await Facture.findById(req.body.facture);
-    if(!facture) {
-        return res.status(400).send('Invalid Facture ');
-    }
-
-    const transaction = await Transaction.findById(req.params.id);
-
-    if(!transaction) return res.status(400).send('Invalid transaction ');
-
-
-    const updatedTransaction = await Transaction.findByIdAndUpdate(
-        req.params.id, 
-        {
+    try {
+        // Making sure the facture exists
+        const facture = await Facture.findById(req.body.facture);
+        if(!facture) return res.status(400).send('Invalid Facture');
+    
+        let transaction = new Transaction({
             name: req.body.name,
             truckNumber: req.body.truckNumber,
             conducteur: req.body.conducteur,
@@ -106,19 +70,60 @@ router.put('/:id', async (req, res) => {
             quantity: req.body.quantity,
             prixUnitaire: req.body.prixUnitaire,
             payment: req.body.payment,
-            updated_at: Date.now()
-        },
-        { new: true }
-    );
+        });
+    
+        transaction = await transaction.save();
+        res.send(transaction);
+        
+    } catch (error) {
+        return res.status(500).send('The transaction cannot be created ');
+        
+    }
 
-    if(!updatedTransaction) {
+} );
+
+// updating a specific transaction
+router.put('/:id', async (req, res) => {
+    if(!mongoose.isValidObjectId(req.params.id)){
+        res.status(400).send('Invalid transaction id');
+    }
+    try {
+        const facture = await Facture.findById(req.body.facture);
+        const transaction = await Transaction.findById(req.params.id);
+        
+        if(!transaction) return res.status(400).send('Invalid transaction ');
+        if(!facture) return res.status(400).send('Invalid facture ');
+
+        const updatedTransaction = await Transaction.findByIdAndUpdate(
+            req.params.id, 
+            {
+                name: req.body.name,
+                truckNumber: req.body.truckNumber,
+                conducteur: req.body.conducteur,
+                date: req.body.date,
+                destination: req.body.destination,
+                nature: req.body.nature,
+                price: req.body.price,
+                facture: req.body.facture,
+                quantity: req.body.quantity,
+                prixUnitaire: req.body.prixUnitaire,
+                payment: req.body.payment,
+                updated_at: Date.now()
+            },
+            { new: true }
+        );
+
+    } catch (error) {
         return res.status(500).send('the transaction cannot be updated');
+        
     }
 
     res.status(200).send(updatedTransaction);
+
 });
 
 router.delete('/:id', (req, res) => {
+    
     Transaction.findByIdAndRemove(req.params.id).then(transaction => {
         if(transaction) {
             return res.status(200).json({ success: true, message: 'the transaction was deleted.'})
