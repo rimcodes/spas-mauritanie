@@ -1,4 +1,4 @@
-<admin-toolbar></admin-toolbar>
+<!-- <admin-toolbar></admin-toolbar> -->
 
 <mat-chip-list aria-label="Fish selection">
   <mat-chip *ngFor="let month of months" [class]="month.active ? 'inactive-month' : ''"  (click)="monthSelected(month.number)">{{ month.name }}</mat-chip>

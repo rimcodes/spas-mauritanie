@@ -31,7 +31,7 @@
         <span> تاريخ آخر تعديل: {{facture.updated_at | date : 'mediumDate' }} </span>
       </ng-template> -->
 
-      <p *ngIf="facture.month"> الشهر:  {{  months[+facture.month - 1 ].name }} </p>
+      <p *ngIf="facture.month"> الشهر:  {{  months[+facture.month - 1 ]!.name }} </p>
       <p>  اسم الزبون: {{ facture.user.name }} </p>
       <p>  الرمز: {{ facture.user.code }} </p>
 
