@@ -30,9 +30,12 @@
         <mat-form-field>
           <mat-label>الشهر</mat-label>
           <mat-select  formControlName="month">
-            <mat-option *ngFor="let month of months" [value]="month.number">
-              {{ month.name }}
-            </mat-option>
+            <ng-container *ngFor="let month of months">
+              <mat-option [value]="month.number">
+                {{ month.name }}
+              </mat-option>
+
+            </ng-container>
 
           </mat-select>
         </mat-form-field>
@@ -45,7 +48,8 @@
             <!-- <mat-option cheched *ngIf="editMode" [value]="'sxsc'">
               user
             </mat-option> -->
-            <mat-option *ngFor="let user of users | async" [value]="user.id">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let user of users | async" value="{{user.id}}">
               {{user.name}}
             </mat-option>
           </mat-select>

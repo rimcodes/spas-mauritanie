@@ -112,13 +112,13 @@ router.put('/:id', async (req, res) => {
             },
             { new: true }
         );
+        res.status(200).send(updatedTransaction);
 
     } catch (error) {
         return res.status(500).send('the transaction cannot be updated');
         
     }
 
-    res.status(200).send(updatedTransaction);
 
 });
 

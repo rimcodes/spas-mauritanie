@@ -5,7 +5,7 @@ export class Transaction {
     name!: string;
     truckNumber?: string;
     conducteur?: string;
-    date?: Date;
+    date?: string;
     destination?: string;
     price!: number;
     facture!: Facture;

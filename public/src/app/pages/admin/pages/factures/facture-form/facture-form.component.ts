@@ -114,9 +114,9 @@ export class FactureFormComponent implements OnInit {
       name: ['', Validators.required],
       user: ['', Validators.required],
       month: ['', Validators.required],
-      number: ['', Validators.required],
-      recite: ['', Validators.required],
       type: ['' , Validators.required],
+      number: [''],
+      recite: [''],
     });
   }
   // method for cheching if an id was passed so that a facture get updated
@@ -129,8 +129,9 @@ export class FactureFormComponent implements OnInit {
         this.editMode = true;
         this.facturesService.getSingleFacture(pararms['id']).subscribe((facture) => {
           this.factureForm['name'].setValue(facture.name);
-          this.factureForm['user'].setValue(facture.user);
-          this.factureForm['month'].setValue(facture.month);
+          this.factureForm['user'].setValue(facture.user.id);
+          this.factureForm['month'].setValue(+facture.month);
+          this.factureForm['type'].setValue(facture.type);
           this.factureForm['number'].setValue(facture.number);
           this.factureForm['recite'].setValue(facture.recite);
 
