@@ -7,8 +7,6 @@ export class Facture {
     month!: number;
     type!: string;
     user!: User;
-    number?: string;
-    recite?: string;
     created_at!: Date;
     updated_at?: Date;
 }

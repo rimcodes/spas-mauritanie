@@ -20,6 +20,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { RouterModule } from '@angular/router';
+import { DialogOverviewComponent } from './dialog-overview/dialog-overview.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -31,6 +33,7 @@ import { RouterModule } from '@angular/router';
     ToolBarComponent,
     DashboardComponent,
     LoadingComponent,
+    DialogOverviewComponent
   ],
   imports: [
     CommonModule,
@@ -48,6 +51,7 @@ import { RouterModule } from '@angular/router';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatDialogModule
   ],
   exports: [
     FactureItemComponent,
@@ -55,7 +59,8 @@ import { RouterModule } from '@angular/router';
     TransactionItemComponent,
     ToolBarComponent,
     DashboardComponent,
-    LoadingComponent
+    LoadingComponent,
+    DialogOverviewComponent
   ]
 })
 export class SharedModule { }

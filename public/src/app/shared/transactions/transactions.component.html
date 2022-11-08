@@ -2,7 +2,10 @@
   <table mat-table class="full-width-table" matSort aria-label="Elements">
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name الاسم</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <span *ngIf="isLTA">الاسم</span>
+        <span *ngIf="!isLTA">رقم الجرار</span>
+      </th>
       <td mat-cell *matCellDef="let row">{{row.name}}</td>
     </ng-container>
 

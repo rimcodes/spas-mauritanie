@@ -1,7 +1,7 @@
 <div class="grid-container">
   <mat-grid-list cols="2" rowHeight="250px">
     <mat-grid-tile *ngFor="let card of cards" [colspan]="2" [rowspan]="2">
-      <app-facture-item [admin]="admin"  [facture]="card"></app-facture-item>
+      <app-facture-item [admin]="admin"  [facture]="card" [isLTA]="card.type == 'LTA'"></app-facture-item>
     </mat-grid-tile>
   </mat-grid-list>
 

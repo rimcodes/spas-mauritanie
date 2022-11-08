@@ -19,12 +19,6 @@ const factureSchema = mongoose.Schema({
         ref: 'User',
         required: true
     },
-    number: {
-        type: String
-    },
-    recite: {
-        type: String
-    },
     created_at: {
         type: Date,
         default: Date.now

@@ -18,7 +18,7 @@ export class FactureFormComponent implements OnInit {
   form!: FormGroup;
   isSubmitted = false;
   valid = true;
-  editMode = true;
+  editMode = false;
   pramId = '';
   breakpoint!: {
     cols: number,
@@ -132,8 +132,6 @@ export class FactureFormComponent implements OnInit {
           this.factureForm['user'].setValue(facture.user.id);
           this.factureForm['month'].setValue(+facture.month);
           this.factureForm['type'].setValue(facture.type);
-          this.factureForm['number'].setValue(facture.number);
-          this.factureForm['recite'].setValue(facture.recite);
 
         });
       }

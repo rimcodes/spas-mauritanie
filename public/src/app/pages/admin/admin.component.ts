@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { map, Observable, startWith } from 'rxjs';
 import { Facture } from 'src/app/models/facture';
 import { MONTHS } from 'src/app/models/months';
 import { User } from 'src/app/models/user';
 import { FacturesService } from 'src/app/services/factures.service';
 import { UsersService } from 'src/app/services/users.service';
+import { DialogOverviewComponent } from '../../shared/dialog-overview/dialog-overview.component';
 
 @Component({
   selector: 'app-admin',
@@ -23,6 +25,7 @@ export class AdminComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private facturesService: FacturesService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +67,18 @@ export class AdminComponent implements OnInit {
   monthSelected(month: number) {
     this.factures$ = this.facturesService.getfilteredFactures('', month);
     this.months[month-1].active =!this.months[month-1].active
+  }
+
+  deleteUser(user: User) {
+    const dialogRef = this.dialog.open(DialogOverviewComponent, {
+      width: '250px',
+      data: user,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // user.id = result;
+      this.getUsers();
+    });
   }
 
 }

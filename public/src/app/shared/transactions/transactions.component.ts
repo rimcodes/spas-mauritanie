@@ -22,7 +22,7 @@ export class TransactionsComponent implements AfterViewInit, OnInit {
   @Input() pageSize = 2;
   @Input() transactions!: Transaction[];
   @Input() admin!: boolean;
-  @Input() isLTA = false;
+  @Input() isLTA!: boolean;
 
   breakpoint = {
     cols: 6,
@@ -32,7 +32,7 @@ export class TransactionsComponent implements AfterViewInit, OnInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   //displayedColumns = this.admin ? ['date', 'name', 'quantity', 'number', 'delivery', 'payment', 'delete'] : ['date', 'name', 'quantity', 'number', 'delivery', 'payment'];
-  displayedColumns = ['name', 'quantity', 'nature', 'date', 'destination', 'number', 'price', 'payment', 'buttons'] ;
+  displayedColumns!: string[] ;
 
   constructor(
     private transactionsService: TransactionsService

@@ -135,8 +135,6 @@ export class TransactionsFormComponent implements OnInit {
             this.transactionForm['name'].setValue(res.name);
             this.transactionForm['truckNumber'].setValue(res.truckNumber);
             this.transactionForm['conducteur'].setValue(res.conducteur);
-            console.log(res.date);
-
             this.transactionForm['date'].setValue(res.date);
             this.transactionForm['destination'].setValue(res.destination);
             this.transactionForm['price'].setValue(res.price);

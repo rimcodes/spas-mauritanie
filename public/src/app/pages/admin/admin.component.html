@@ -8,12 +8,9 @@
   <mat-tab label="الزبناء">
     <mat-card class="form-card" (window:resize)="onResize($event)">
       <div class="actions">
-        <button mat-fab color="primary">
-          <mat-icon [routerLink]="['users', 'form']">add</mat-icon>
+        <button [routerLink]="['users', 'form']" mat-fab color="primary">
+          <mat-icon>add</mat-icon>
         </button>
-        <!-- <button mat-fab color="accent">
-          <mat-icon>filter_alt</mat-icon>
-        </button> -->
         <div>
           <form>
             <mat-form-field>
@@ -38,11 +35,12 @@
         <mat-list-item>
           <div class="users-list">
             <h3> الاسم </h3>
-            <div> مدير </div>
+            <p> الرمز</p>
             <ng-container *ngIf="!breakpoint">
-              <p> الرمز</p>
+              <div> مدير </div>
               <small>تاريخ الانشاء </small>
             </ng-container>
+            <div></div>
             <div></div>
             <div></div>
           </div>
@@ -59,24 +57,27 @@
                 مدير
               </mat-slide-toggle>
             </div>
-            <ng-container>
+            <ng-container *ngIf="!breakpoint">
               <p> {{ user.code }} </p>
 
               <small> {{ user.created_at | date }} </small>
             </ng-container>
 
             <div>
-              <button mat-mini-fab color="primary">
-                <mat-icon [routerLink]="['users', 'form', user.id]">edit</mat-icon>
+              <button [routerLink]="['users', 'form', user.id]" mat-mini-fab color="primary">
+                <mat-icon>edit</mat-icon>
               </button>
-              <button mat-mini-fab color="warn">
+            </div>
+
+            <div>
+              <button mat-mini-fab color="warn" (click)="deleteUser(user)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
 
             <div style="justify-self: end;">
-              <button mat-mini-fab color="clear">
-                <mat-icon [routerLink]="['users', user.id]">ios_share</mat-icon>
+              <button  [routerLink]="['users', user.id]" mat-mini-fab color="clear">
+                <mat-icon>ios_share</mat-icon>
               </button>
             </div>
 
@@ -100,8 +101,8 @@
               <small> {{ user.created_at | date }} </small>
 
               <div>
-                <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
-                  <mat-icon [routerLink]="['users', 'form', user.id]">edit</mat-icon>
+                <button [routerLink]="['users', 'form', user.id]" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+                  <mat-icon>edit</mat-icon>
                 </button>
                 <button mat-mini-fab color="warn" aria-label="Example icon button with a delete icon">
                   <mat-icon>delete</mat-icon>

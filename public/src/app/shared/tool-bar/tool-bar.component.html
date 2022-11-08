@@ -8,9 +8,9 @@
       <a mat-list-item [routerLink]="['/']">الرئيسية</a>
       <a mat-list-item [routerLink]="['/', 'dashboard']">قائمة الاشهر</a>
       <a mat-list-item [routerLink]="['/', 'factures']">الفواتير</a>
-      <button mat-raised-button color="accent">
+      <button (click)="logOut()" mat-raised-button color="accent">
         الخروج
-        <mat-icon (click)="logOut()">logout</mat-icon>
+        <mat-icon>logout</mat-icon>
       </button>
     </mat-nav-list>
   </mat-sidenav>

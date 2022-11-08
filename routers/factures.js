@@ -49,8 +49,6 @@ router.post('/', async (req, res) => {
             type: req.body.type,
             month: req.body.month,
             user: req.body.user,
-            number: req.body.number,
-            recite: req.body.recite,
             created_at: Date.now(),
         })
         facture = await facture.save();
@@ -73,8 +71,6 @@ router.put('/:id', async (req, res) => {
                 type: req.body.type,
                 month: req.body.month,
                 user: req.body.user,
-                number: req.body.number,
-                recite: req.body.recite,
                 updated_at: Date.now()
             },
             { new: true }
