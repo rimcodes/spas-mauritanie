@@ -26,6 +26,7 @@ export class AuthService {
     }
 
     logout() {
+      this.tokenService.removeUserId()
         this.tokenService.removeToken();
         this.router.navigate(['/login']);
     }

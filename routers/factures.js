@@ -104,23 +104,23 @@ router.get('/months/users', async (req, res) => {
         const query = Facture.find();
         if (req.query.month & !req.query.user) {
             // filters = { month: req.query.month, user: req.query.user }
-            query.find({ month: req.query.month }).populate('user', 'name email compt addres code ');
+            query.find({ month: req.query.month }).populate('user', 'name email compt addres code chifer');
         }
         if (req.query.user && !req.query.month) {
-            query.find({ user: req.query.user }).populate('user', 'name email compt addres code ');
+            query.find({ user: req.query.user }).populate('user', 'name email compt addres code chifer ');
         }
         if (req.query.month && req.query.user) {
-            query.find({ month: req.query.month, user: req.query.user }).populate('user', 'name email compt addres code ');
+            query.find({ month: req.query.month, user: req.query.user }).populate('user', 'name email compt addres code chifer');
         }
         if(req.query.maxmonth && req.query.minmonth) {
-            query.find({ month: { $lte: req.query.maxmonth, $gte: req.query.minmonth } }).populate('user', 'name email compt addres code ');
+            query.find({ month: { $lte: req.query.maxmonth, $gte: req.query.minmonth } }).populate('user', 'name email compt addres code chifer');
         }
         if (req.query.minmonth && !req.query.maxmonth) {
-            query.find({ month: { $gte: req.query.minmonth } }).populate('user', 'name email compt addres code ');
+            query.find({ month: { $gte: req.query.minmonth } }).populate('user', 'name email compt addres code chifer');
             
         }
         if(req.query.maxmonth && !req.query.minmonth) {
-            query.find({ month: { $lte: req.query.maxmonth } }).populate('user', 'name email compt addres code ');
+            query.find({ month: { $lte: req.query.maxmonth } }).populate('user', 'name email compt addres code chifer');
         }
         // const factures = await Facture.find(filters).populate('user', 'name email compt addres code ');
         query.getFilter();

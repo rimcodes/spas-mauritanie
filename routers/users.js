@@ -138,7 +138,12 @@ router.post(`/register`, async (req, res) => {
     return res.status(500).send('The product cannot be created');
 
     res.send(user);
-} );
+});
+
+// // Update the user chifer field
+// router.put('/chifer/:id', async (req, res) => {
+
+// });
 
 router.delete('/:id', (req, res) => {
     User.findByIdAndRemove(req.params.id).then( (user) => {

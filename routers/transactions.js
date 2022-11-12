@@ -14,7 +14,14 @@ router.get(`/`, async (req, res) => {
         filter = { facture: req.query.factures.split(',') };
     }
     try {
-        transactionList = await Transaction.find(filter).populate('facture');
+        // transactionList = await Transaction.find(filter).populate('facture').populate({ path: 'facture.user', model: 'User'});
+        transactionList = await Transaction.find(filter).populate({
+            path: 'facture',
+            populate: {
+                path: 'user',
+                select: 'name email compt addres code chifer'
+            }
+        });
         
     } catch (error) {
         console.log("Erro loged in the console: ", error);
@@ -27,7 +34,13 @@ router.get(`/`, async (req, res) => {
 // get the transaction with the specified id 
 router.get(`/:id`, async (req, res) => {
     try {
-        const transaction = await Transaction.findById(req.params.id).populate('facture');
+        const transaction = await Transaction.findById(req.params.id).populate({
+            path: 'facture',
+            populate: {
+                path: 'user',
+                select: 'name email compt addres code chifer'
+            }
+        });
         res.send(transaction);
         
     } catch (error) {
@@ -41,7 +54,13 @@ router.get(`/:id`, async (req, res) => {
 router.get(`/factures/:facture`, async (req, res) => {
     
     try {
-        const transaction = await Transaction.find({ facture: req.params.facture }).populate('facture');
+        const transaction = await Transaction.find({ facture: req.params.facture }).populate({
+            path: 'facture',
+            populate: {
+                path: 'user',
+                select: 'name email compt addres code chifer'
+            }
+        });
         res.send(transaction);
        
     } catch (error) {

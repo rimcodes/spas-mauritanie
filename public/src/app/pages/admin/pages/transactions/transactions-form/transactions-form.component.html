@@ -1,3 +1,5 @@
+<admin-toolbar></admin-toolbar>
+
 <mat-card class="form-card">
   <form [formGroup]="form" [class]="isSubmitted && valid ? 'loading-form' : ''">
     <h2>معاملة جديدة</h2>
@@ -10,7 +12,7 @@
             <!-- <mat-option cheched *ngIf="editMode" [value]="'sxsc'">
               user
             </mat-option> -->
-            <mat-option *ngFor="let facture of factures | async" [value]="facture.id" (click)="changeFormType(facture.type)">
+            <mat-option *ngFor="let facture of factures | async" [value]="facture.id" (click)="changeFormType(facture)">
               {{facture.name}}
             </mat-option>
           </mat-select>
@@ -75,10 +77,10 @@
           <mat-label>
             {{ isLTA ? 'التاريخ' : 'الوصول' }}
           </mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="date" >
+          <input matInput [matDatepicker]="date" formControlName="date" >
           <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+          <mat-datepicker #date></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
       <!-- price  -->

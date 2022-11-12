@@ -34,6 +34,12 @@ export class UsersService {
         return this.http.put<User>(`${this.apiURLUsers}${userId}`, user);
     }
 
+    // Update user chifer field
+    updateUserChifer(chifer: number, id: string) {
+      //updating a specific user
+      return this.http.put<User>(`${this.apiURLUsers}${id}`, { chifer: chifer });
+    }
+
     // Deleting a user
     deleteUser(userId: string): Observable<any> {
         return this.http.delete<any>(`${this.apiURLUsers}${userId}`);

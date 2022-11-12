@@ -24,6 +24,8 @@ export class TransactionsComponent implements AfterViewInit, OnInit {
   @Input() admin!: boolean;
   @Input() isLTA!: boolean;
 
+  totalAmount = 0;
+
   breakpoint = {
     cols: 6,
     ration: '2:1',
@@ -60,6 +62,8 @@ export class TransactionsComponent implements AfterViewInit, OnInit {
       phoneSize: (window.innerWidth <= 760)
     }
 
+    this.claculateAmount()
+
   }
 
   onResize(event: any) {
@@ -90,6 +94,13 @@ export class TransactionsComponent implements AfterViewInit, OnInit {
       this.displayedColumns = ['name', 'truck', 'conducteur', 'quantity', 'nature', 'date', 'perunit', 'price', 'payment', 'buttons'] ;
 
     }
+  }
+
+  // Calculating the total amount in the
+  claculateAmount() {
+    this.transactions.forEach((el) => {
+      this.totalAmount += el.price
+    })
   }
 
 }

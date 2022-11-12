@@ -87,7 +87,7 @@
     <ng-container matColumnDef="buttons">
       <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
       <td mat-cell *matCellDef="let row">
-        <button [routerLink]="['transactions', 'form', row.id]" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+        <button [routerLink]="['', 'rc-admin', 'transactions', 'form', row.id]" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
           <mat-icon>edit</mat-icon>
         </button>
         <button (click)="deleteTransaction(row.id)" mat-mini-fab color="warn" aria-label="Example icon button with a delete icon">
@@ -108,7 +108,13 @@
       aria-label="Select page">
   </mat-paginator>
 </div>
-<button [routerLink]="['transactions', 'form']" *ngIf="admin" class="add-button" mat-fab color="primary" aria-label="Add new item button">
+<button [routerLink]="['/', 'rc-admin', 'transactions', 'form']" *ngIf="admin" class="add-button" mat-fab color="primary" aria-label="Add new item button">
   <mat-icon>add</mat-icon>
 </button>
+
+<div class="total-amount">
+  <p>
+    المجموع: {{ totalAmount }}
+  </p>
+</div>
 

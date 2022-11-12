@@ -14,7 +14,8 @@ const userSchema = mongoose.Schema({
         required: true
     },
     notes: {
-        type: String
+        type: String,
+        default: 0
     },
     chifer: {
         type: Number

@@ -5,13 +5,13 @@ export class Transaction {
     name!: string;
     truckNumber?: string;
     conducteur?: string;
-    date?: string;
+    date?: Date;
     destination?: string;
     price!: number;
     facture!: Facture;
     quantity!: number;
     prixUnitaire!: number;
-    nature!: string;
+    nature?: string;
     payment?: string;
     created_at!: string;
     updated_at?: string;

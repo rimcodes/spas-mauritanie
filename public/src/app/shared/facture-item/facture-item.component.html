@@ -24,6 +24,7 @@
         <div class="text">
           <h2>الشركة العربية للخدمات</h2>
           <h5>مصلحة المحاسبة</h5>
+          <p *ngIf="admin">{{ facture.name }}</p>
         </div>
       </div>
       <!-- <span *ngIf="!facture.updated_at; else update"> تاريخ الانشاء: {{facture.created_at | date : 'mediumDate' }} </span>
