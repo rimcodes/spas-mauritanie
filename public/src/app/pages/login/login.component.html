@@ -1,5 +1,5 @@
 <form class="login-form" [formGroup]="logInFormGroup">
-  <h2>Login </h2>
+  <h2>تسجيل الدخول</h2>
   <mat-form-field appearance="fill">
       <mat-label>رمز الزبون</mat-label>
       <input matInput type="text" formControlName="code">
@@ -9,5 +9,5 @@
       <input matInput [type]="showPass ? 'text' : 'password'" formControlName="password">
       <mat-icon matSuffix (click)="showPassword()">visibility</mat-icon>
   </mat-form-field>
-  <button mat-raised-button (click)="onSubmit()" color="primary">Login</button>
+  <button mat-raised-button (click)="onSubmit()" color="primary">سجل الدخول</button>
 </form>
