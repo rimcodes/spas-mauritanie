@@ -6,7 +6,7 @@ const router = express.Router();
 // get request for all factures in the db
 router.get('/', async (req, res) => {
     try {
-        const factures = await Facture.find().populate('user', 'name email compt address chifer code notes');
+        const factures = await Facture.find().populate('user', 'name email compt address chifer code notes currency');
         res.status(200).send(factures);
         
     } catch (error) {
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 // Get facture using the user id
 router.get('/users/:user', async (req, res) => {
     try {
-        const factures = await Facture.find( { user: req.params.user }).populate('user', 'name email compt addres chifer code notes');
+        const factures = await Facture.find( { user: req.params.user }).populate('user', 'name email compt addres chifer code notes currency');
         res.status(200).send(factures);
         
     } catch (error) {
@@ -31,7 +31,7 @@ router.get('/users/:user', async (req, res) => {
 // get request for single facture based on id parameter in the url
 router.get('/:id', async(req, res) => {
     try {
-        const facture = await Facture.findById(req.params.id).populate('user', 'name email compt address chifer code notes');
+        const facture = await Facture.findById(req.params.id).populate('user', 'name email compt address chifer code notes currency');
         res.status(200).send(facture);
         
     } catch (error) {
@@ -104,23 +104,23 @@ router.get('/months/users', async (req, res) => {
         const query = Facture.find();
         if (req.query.month & !req.query.user) {
             // filters = { month: req.query.month, user: req.query.user }
-            query.find({ month: req.query.month }).populate('user', 'name email compt addres code chifer');
+            query.find({ month: req.query.month }).populate('user', 'name email compt addres code chifer currency');
         }
         if (req.query.user && !req.query.month) {
-            query.find({ user: req.query.user }).populate('user', 'name email compt addres code chifer ');
+            query.find({ user: req.query.user }).populate('user', 'name email compt addres code chifer currency');
         }
         if (req.query.month && req.query.user) {
-            query.find({ month: req.query.month, user: req.query.user }).populate('user', 'name email compt addres code chifer');
+            query.find({ month: req.query.month, user: req.query.user }).populate('user', 'name email compt addres code chifer currency');
         }
         if(req.query.maxmonth && req.query.minmonth) {
-            query.find({ month: { $lte: req.query.maxmonth, $gte: req.query.minmonth } }).populate('user', 'name email compt addres code chifer');
+            query.find({ month: { $lte: req.query.maxmonth, $gte: req.query.minmonth } }).populate('user', 'name email compt addres code chifer currency');
         }
         if (req.query.minmonth && !req.query.maxmonth) {
-            query.find({ month: { $gte: req.query.minmonth } }).populate('user', 'name email compt addres code chifer');
+            query.find({ month: { $gte: req.query.minmonth } }).populate('user', 'name email compt addres code chifer currency');
             
         }
         if(req.query.maxmonth && !req.query.minmonth) {
-            query.find({ month: { $lte: req.query.maxmonth } }).populate('user', 'name email compt addres code chifer');
+            query.find({ month: { $lte: req.query.maxmonth } }).populate('user', 'name email compt addres code chifer currency');
         }
         // const factures = await Facture.find(filters).populate('user', 'name email compt addres code ');
         query.getFilter();

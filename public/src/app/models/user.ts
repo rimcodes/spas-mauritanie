@@ -12,6 +12,7 @@ export class User {
     address?: string;
     bank?: string;
     compt?: string;
+    currency?: string;
     created_at?: string;
     updated_at?: string;
 }

@@ -35,6 +35,7 @@
       <p *ngIf="facture.month"> الشهر:  {{  months[+facture.month - 1 ]!.name }} </p>
       <p>  اسم الزبون: {{ facture.user.name }} </p>
       <p>  الرمز: {{ facture.user.code }} </p>
+      <p>  رقم الاعمال: {{ facture.user.chifer }} <span>{{ facture.user.currency }}</span> </p>
 
       <ng-container *ngIf="transactions">
         <app-transactions [isLTA]="isLTA" [admin]="admin" [transactions]="transactions"></app-transactions>
