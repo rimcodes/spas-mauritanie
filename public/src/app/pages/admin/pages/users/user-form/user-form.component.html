@@ -20,6 +20,23 @@
 
       <mat-grid-tile colspan="2">
         <mat-form-field>
+          <mat-label> نوعية العملة </mat-label>
+          <mat-select  formControlName="currency">
+            <mat-option value="US">
+              US Dollar
+            </mat-option>
+            <mat-option value="EUR">
+              EURO
+            </mat-option>
+            <mat-option value="MRU">
+              MRU
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-form-field>
           <mat-label>الملاحظات</mat-label>
           <textarea matInput placeholder="اضف الملاحظات هنا ..." formControlName="notes"></textarea>
         </mat-form-field>

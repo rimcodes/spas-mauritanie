@@ -114,9 +114,7 @@ export class FactureFormComponent implements OnInit {
       name: ['', Validators.required],
       user: ['', Validators.required],
       month: ['', Validators.required],
-      type: ['' , Validators.required],
-      number: [''],
-      recite: [''],
+      type: ['' , Validators.required]
     });
   }
   // method for cheching if an id was passed so that a facture get updated

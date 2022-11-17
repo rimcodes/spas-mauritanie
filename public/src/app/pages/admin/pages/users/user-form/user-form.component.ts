@@ -125,6 +125,7 @@ export class UserFormComponent implements OnInit {
       address: [''],
       bank: [''],
       compt: [''],
+      currency: [''],
     });
   }
   // method for cheching if an id was passed so that a user get updated

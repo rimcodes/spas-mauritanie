@@ -44,6 +44,9 @@ const userSchema = mongoose.Schema({
         type: String,
         default: ''
     },
+    currency: {
+        type: String
+    },
     created_at: {
         type: Date,
         default: Date.now

@@ -41,7 +41,8 @@ router.post(`/`, async (req, res) => {
             bank: req.body.bank,
             compt: req.body.zip,
             notes: req.body.notes,
-            chifer: req.body.chifer
+            chifer: req.body.chifer,
+            currency: req.body.currency
         });
         
         user = await user.save();
@@ -76,7 +77,8 @@ router.put('/:id', async (req, res) => {
                 bank: req.body.bank,
                 compt: req.body.compt,
                 notes: req.body.notes,
-                chifer: req.body.chifer
+                chifer: req.body.chifer,
+                currency: req.body.currency
             },
             { new: true }
         );
@@ -129,7 +131,8 @@ router.post(`/register`, async (req, res) => {
         phone: req.body.phone,
         address: req.body.address,
         bank: req.body.bank,
-        compt: req.body.compt
+        compt: req.body.compt,
+        currency: req.body.currency
     });
 
     user = await user.save();

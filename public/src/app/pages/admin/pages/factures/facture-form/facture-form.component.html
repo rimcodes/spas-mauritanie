@@ -58,20 +58,6 @@
         </mat-form-field>
       </mat-grid-tile>
 
-      <mat-grid-tile colspan="2">
-        <mat-form-field>
-          <mat-label> رقم الفاتورة </mat-label>
-          <input matInput type="number" formControlName="number">
-        </mat-form-field>
-      </mat-grid-tile>
-
-      <mat-grid-tile colspan="2">
-        <mat-form-field>
-          <mat-label>رقم الوصل</mat-label>
-          <input matInput type="text" formControlName="recite">
-        </mat-form-field>
-      </mat-grid-tile>
-
     </mat-grid-list>
 
     <button mat-raised-button (click)="onSubmit()" color="primary" [disabled]="isSubmitted && valid">
